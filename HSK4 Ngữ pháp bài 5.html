@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSK4 · Bài 5 — 只买对的，不买贵的 · Ngữ pháp</title>
+<style>
+:root{
+  --bg-app: #FFF8F6;
+  --bg-app-2: #FCEDEB;
+  --ink: #402530;
+  --ink-soft: #8C6B72;
+  --card-bg: #FFFFFF;
+  --card-line: #F3DEE0;
+  --shadow: rgba(178, 58, 72, 0.10);
+  --shadow-strong: rgba(178, 58, 72, 0.18);
+
+  --c-cover-1:#FFEADD; --c-cover-2:#FFCBDA;
+  --c-cover-title:#E8385F;
+  --c-cover-subtitle:#E8734A;
+
+  --c-grammar:#2E7D9E;     --c-grammar-bg:#DCF0F7;    --c-grammar-line:#A9D9ED;
+  --c-example:#C6486B;     --c-example-bg:#FBE3EC;    --c-example-line:#F0B8CE;
+  --c-practice:#4E8C6E;    --c-practice-bg:#E4F1E9;   --c-practice-line:#A9D3BB;
+  --c-highlight:#0E8F82;   --c-highlight-bg:#DCF2EF;  --c-highlight-line:#8CD3C9;
+  --c-summary:#7A3D64;     --c-summary-bg:#F1E4EC;    --c-summary-line:#D9B8CE;
+  --c-expand:#C6672A;      --c-expand-bg:#FBE8D6;     --c-expand-line:#EFC090;
+
+  --font-zh: "SimHei","Heiti SC","STHeiti","Microsoft YaHei","黑体",sans-serif;
+  --font-latin: "Times New Roman", Times, serif;
+
+  --sidebar-w: 254px;
+  --sidebar-w-collapsed: 60px;
+}
+
+*{ box-sizing:border-box; }
+html{ font-size:22px; }
+body{
+  margin:0; font-family:var(--font-latin); background:var(--bg-app); color:var(--ink);
+  -webkit-font-smoothing:antialiased; line-height:1.7;
+}
+h1,h2,h3,h4,p,ul,ol,dl,dd,dt{ font-family:var(--font-latin); }
+.zh, .zh *{ font-family:var(--font-zh); line-height:1.85; }
+.num-latin{ font-family:var(--font-latin) !important; }
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  position:fixed; top:0; left:0; bottom:0; width:var(--sidebar-w);
+  background:var(--card-bg); border-right:1px solid var(--card-line); overflow-y:auto; z-index:100;
+  transition:width .28s ease;
+}
+body.sidebar-collapsed .sidebar{ width:var(--sidebar-w-collapsed); }
+.sidebar-head{ padding:16px 14px 12px; border-bottom:1px solid var(--card-line); text-align:center; }
+.brand{ font-weight:700; font-size:0.95rem; color:var(--ink); white-space:nowrap; overflow:hidden; }
+.sub{ font-size:0.75rem; color:var(--ink-soft); margin-top:4px; white-space:nowrap; overflow:hidden; }
+body.sidebar-collapsed .sub, body.sidebar-collapsed .brand{ opacity:0; }
+
+.nav-group summary, .nav-single > button{
+  display:flex; align-items:center; gap:10px; width:100%; text-align:left; padding:11px 14px;
+  background:none; border:none; cursor:pointer; font-size:0.86rem; font-weight:700; color:var(--ink); list-style:none;
+}
+.nav-group summary::-webkit-details-marker{ display:none; }
+.nav-group summary .chev{ margin-left:auto; font-size:0.75rem; color:var(--ink-soft); transition:transform .2s; }
+.nav-group[open] summary .chev{ transform:rotate(90deg); }
+.nav-group{ border-bottom:1px solid var(--card-line); }
+.nav-single{ border-bottom:1px solid var(--card-line); }
+.nav-single > button{ font-weight:700; }
+.nav-item{
+  display:block; width:100%; text-align:left; background:none; border:none; cursor:pointer;
+  padding:7px 14px 7px 34px; font-size:0.8rem; color:var(--ink-soft);
+  border-left:3px solid transparent;
+}
+.nav-item:hover, .nav-single>button:hover{ background:var(--bg-app-2); }
+.nav-item.active, .nav-single > button.active{
+  background:var(--c-summary-bg); color:var(--c-summary); font-weight:700; border-left-color:var(--c-summary);
+}
+body.sidebar-collapsed .nav-group summary, body.sidebar-collapsed .nav-single>button{
+  justify-content:center; padding:11px 0;
+}
+body.sidebar-collapsed .nav-group summary .label,
+body.sidebar-collapsed .nav-group summary .chev,
+body.sidebar-collapsed .nav-single > button .label,
+body.sidebar-collapsed .nav-item{ display:none; }
+.sidebar-backdrop{ display:none; }
+
+/* ===== CONTENT COL ===== */
+.content-col{
+  margin-left:var(--sidebar-w); min-height:100vh; display:flex; flex-direction:column;
+  transition:margin-left .28s ease;
+}
+body.sidebar-collapsed .content-col{ margin-left:var(--sidebar-w-collapsed); }
+.main{ padding:26px 40px; flex:1 0 auto; max-width:1440px; margin:0 auto; width:100%; }
+.top-bar{ display:flex; align-items:center; justify-content:flex-end; margin-bottom:16px; }
+.fullscreen-toggle{ background:none; border:1px solid var(--card-line); border-radius:10px; width:38px; height:38px; font-size:1.1rem; cursor:pointer; color:var(--ink); }
+.fullscreen-toggle:hover{ background:var(--bg-app-2); }
+.site-footer{
+  background:var(--bg-app); color:var(--ink-soft); display:flex; align-items:center; justify-content:center;
+  font-size:0.8rem; padding:12px 0; flex:0 0 auto; text-align:center;
+}
+
+.slide{ display:none; }
+.slide.active{ display:block; animation:fadeIn .35s ease; }
+@keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+.slide-card{
+  background:var(--card-bg); border:1px solid var(--card-line); border-radius:26px;
+  box-shadow:0 10px 28px var(--shadow); padding:34px 40px; min-height:60vh;
+}
+
+.eyebrow{ display:flex; width:max-content; align-items:center; gap:8px; font-size:0.85rem; font-weight:700; letter-spacing:.02em; padding:5px 14px; border-radius:999px; margin:0 auto 14px; }
+.eyebrow.grammar{ color:var(--c-grammar); background:var(--c-grammar-bg); border:1px solid var(--c-grammar-line); }
+.eyebrow.practice{ color:var(--c-practice); background:var(--c-practice-bg); border:1px solid var(--c-practice-line); }
+.eyebrow.review{ color:var(--c-highlight); background:var(--c-highlight-bg); border:1px solid var(--c-highlight-line); }
+.eyebrow.summary{ color:var(--c-summary); background:var(--c-summary-bg); border:1px solid var(--c-summary-line); }
+.eyebrow.expand{ color:var(--c-expand); background:var(--c-expand-bg); border:1px solid var(--c-expand-line); }
+
+.slide h2{ font-size:2rem; margin:0 0 6px; color:var(--ink); text-align:center; }
+.slide .subtitle{ font-size:1.15rem; color:var(--ink-soft); margin:0 0 20px; text-align:center; }
+
+/* ===== COVER ===== */
+.cover-slide .slide-card{
+  background:linear-gradient(135deg, var(--c-cover-1), var(--c-cover-2));
+  color:var(--ink); display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:70vh;
+  padding:60px 60px; text-align:center;
+}
+.cover-badge{ background:rgba(43,36,64,0.08); border:1px solid rgba(43,36,64,0.14); border-radius:999px; padding:6px 16px; font-size:0.85rem; font-weight:700; margin-bottom:22px; }
+.cover-slide h1.zh{ font-size:4.2rem; margin:0 0 6px; line-height:1.1; color:var(--c-cover-title); text-shadow:0 1px 2px rgba(64,37,48,0.10); }
+.cover-slide .cover-vi{ font-size:2rem; margin:0 0 18px; letter-spacing:.01em; font-weight:700; color:var(--c-cover-subtitle); text-shadow:0 1px 2px rgba(64,37,48,0.08); }
+.cover-slide .cover-points{
+  display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:8px; max-width:640px;
+}
+.cover-point-chip{
+  background:rgba(255,255,255,0.65); border:1.5px solid rgba(43,36,64,0.16); border-radius:999px;
+  padding:7px 16px; font-size:0.95rem; font-weight:700; color:var(--ink);
+}
+@media (max-width:600px){
+  .cover-slide h1.zh{ font-size:2.6rem; }
+  .cover-slide .cover-vi{ font-size:1.3rem; }
+  .cover-slide .slide-card{ padding:36px 20px; }
+}
+
+/* ===== GRAMMAR EXPLANATION BLOCK ===== */
+.gpoint-num{
+  display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:50%;
+  background:var(--c-grammar); color:#fff; font-weight:700; font-size:0.95rem; margin-right:8px; flex:0 0 auto;
+}
+.gpoint-head{ display:flex; align-items:center; justify-content:center; gap:2px; margin-bottom:18px; }
+.gpoint-head h2{ margin:0; }
+.explain-box{
+  background:var(--c-grammar-bg); border:1.5px solid var(--c-grammar-line); border-radius:16px;
+  padding:20px 24px; margin-bottom:20px;
+}
+.explain-box .theory-list{ list-style:none; margin:0; padding:0; }
+.explain-box .theory-list li{
+  font-size:1.12rem; margin:0 0 10px; color:var(--ink); line-height:1.75; padding-left:22px; position:relative;
+}
+.explain-box .theory-list li:last-child{ margin-bottom:0; }
+.explain-box .theory-list li:before{ content:"–"; position:absolute; left:0; color:var(--c-grammar); font-weight:700; }
+
+.pattern-box{ background:var(--c-grammar-bg); border:2px solid var(--c-grammar); border-radius:14px; padding:16px 22px; margin-bottom:16px; }
+.pattern-box-title{ font-weight:700; font-size:0.95rem; color:var(--c-grammar); margin:0 0 10px; display:flex; align-items:center; gap:6px; text-transform:uppercase; letter-spacing:.02em; }
+.pattern-box .pattern-line{ display:block; font-size:1.3rem; font-weight:700; color:var(--c-grammar); line-height:1.75; padding-left:22px; position:relative; margin-bottom:8px; }
+.pattern-box .pattern-line:last-child{ margin-bottom:0; }
+.pattern-box .pattern-line:before{ content:"–"; position:absolute; left:0; color:var(--c-grammar); font-weight:700; }
+.explain-box .theory-list b{ color:var(--c-grammar); }
+
+.example-list{ list-style:none; margin:0; padding:0; counter-reset:ex; }
+.example-list li{
+  counter-increment:ex; position:relative; padding:14px 18px 14px 48px; margin-bottom:12px;
+  border-radius:12px; background:var(--bg-app-2); font-size:1.3rem; line-height:1.8;
+}
+.example-list li:before{
+  content:counter(ex); position:absolute; left:12px; top:50%; transform:translateY(-50%);
+  width:26px; height:26px; border-radius:50%; background:var(--c-grammar); color:#fff;
+  font-size:0.85rem; font-weight:700; display:flex; align-items:center; justify-content:center; font-family:var(--font-latin);
+}
+.example-list .zh{ font-size:1.7rem; }
+.example-list .hl{ color:var(--c-grammar); font-weight:700; white-space:nowrap; }
+
+.section-label{
+  font-weight:700; color:var(--c-grammar); font-size:0.95rem; margin:22px 0 10px;
+  display:flex; align-items:center; gap:8px;
+}
+.section-label:before{ content:"●"; font-size:0.6rem; }
+
+/* ===== GRAMMAR POINT SUB-BOXES (Giải thích / Ví dụ / Luyện tập) ===== */
+.gp-box{ border-radius:18px; padding:22px 26px; margin-bottom:28px; border:1.5px solid; }
+.gp-box-title{ font-weight:700; font-size:1.15rem; margin:0 0 14px; display:flex; align-items:center; gap:8px; }
+.gp-box.gp-explain{ background:var(--c-grammar-bg); border-color:var(--c-grammar-line); }
+.gp-box.gp-explain .gp-box-title{ color:var(--c-grammar); }
+.gp-box.gp-explain .explain-box{ background:#fff; margin-bottom:14px; }
+.gp-box.gp-explain .example-list{ margin-top:0; }
+.gp-box.gp-example{ background:var(--c-example-bg); border-color:var(--c-example-line); }
+.gp-box.gp-example .gp-box-title{ color:var(--c-example); }
+.gp-box.gp-example .example-list li{ background:#fff; }
+.gp-box.gp-practice{ background:var(--c-practice-bg); border-color:var(--c-practice-line); }
+.gp-box.gp-practice .gp-box-title{ color:var(--c-practice); }
+.gp-box.gp-practice .practice-item{ background:#fff; }
+.gp-box .sub-label{ font-weight:700; font-size:0.92rem; color:var(--ink); margin:0 0 8px; }
+
+/* ===== USAGE BOXES (thay cho bảng khi từ có nhiều cách dùng) ===== */
+.usage-box{ background:#fff; border-radius:14px; padding:18px 22px; margin-bottom:16px; border-left:5px solid var(--c-grammar); box-shadow:0 1px 4px rgba(64,37,48,0.06); }
+.usage-box:last-child{ margin-bottom:0; }
+.usage-box.u2{ border-left-color:var(--c-example); }
+.usage-box.u3{ border-left-color:var(--c-expand); }
+.usage-head{ display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+.usage-num{ width:28px; height:28px; border-radius:50%; background:var(--c-grammar); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.95rem; flex-shrink:0; font-family:var(--font-latin); }
+.usage-box.u2 .usage-num{ background:var(--c-example); }
+.usage-box.u3 .usage-num{ background:var(--c-expand); }
+.usage-title{ font-size:1.25rem; font-weight:700; }
+.usage-tag{ font-size:0.88rem; color:var(--ink-soft); font-weight:400; }
+.usage-box .theory-list{ list-style:none; margin:0 0 12px; padding:0; }
+.usage-box .theory-list li{ position:relative; padding-left:16px; margin-bottom:8px; font-size:1rem; line-height:1.7; }
+.usage-box .theory-list li:last-child{ margin-bottom:0; }
+.usage-box .theory-list li:before{ content:"–"; position:absolute; left:0; color:inherit; font-weight:700; }
+.usage-box.u1 .theory-list li:before, .usage-box.u1 .theory-list b{ color:var(--c-grammar); }
+.usage-box.u2 .theory-list li:before, .usage-box.u2 .theory-list b{ color:var(--c-example); }
+.usage-box.u3 .theory-list li:before, .usage-box.u3 .theory-list b{ color:var(--c-expand); }
+.usage-box .example-list{ margin:0; }
+.usage-box .example-list li{ font-size:1.02rem; padding:10px 14px 10px 42px; margin-bottom:8px; }
+.usage-box .example-list li:last-child{ margin-bottom:0; }
+.usage-box .example-list .zh{ font-size:1.4rem; }
+.usage-box.u1 .example-list li:before{ background:var(--c-grammar); }
+.usage-box.u2 .example-list li:before{ background:var(--c-example); }
+.usage-box.u3 .example-list li:before{ background:var(--c-expand); }
+.usage-box .example-list .hl{ color:var(--c-grammar); font-weight:700; white-space:nowrap; }
+.usage-box .example-list .dialog-ex{ display:flex; flex-direction:column; gap:4px; }
+.usage-box .example-list .dialog-ex .dialog-line{ display:grid; grid-template-columns:1.7em 1fr; column-gap:2px; align-items:baseline; margin:0; }
+.usage-box .example-list .dialog-ex .speaker{ font-weight:700; }
+.usage-box.u2 .example-list .hl{ color:var(--c-example); font-weight:700; white-space:nowrap; }
+.usage-box.u3 .example-list .hl{ color:var(--c-expand); font-weight:700; white-space:nowrap; }
+.gp-box + .gp-box{ margin-top:4px; }
+
+/* --- Khung theo bậc luyện tập: cơ học (cam) / bán giao tiếp (xanh lá, = gp-practice) / giao tiếp tự do (tím) ---
+   Kỹ thuật: ghi đè cục bộ 3 biến --c-practice/-bg/-line bên trong từng khung, mọi rule dùng
+   var(--c-practice...) bên dưới (practice-item, blank-line, hint-word, answer-box, reveal-btn...)
+   sẽ tự động đổi màu theo, không cần lặp lại CSS. */
+.gp-box.tier-mechanical{
+  --c-practice: var(--c-expand); --c-practice-bg: var(--c-expand-bg); --c-practice-line: var(--c-expand-line);
+  background:var(--c-practice-bg); border-color:var(--c-practice-line);
+}
+.gp-box.tier-mechanical .gp-box-title{ color:var(--c-practice); }
+.gp-box.tier-mechanical .practice-item{ background:#fff; }
+
+.gp-box.tier-free{
+  --c-practice: var(--c-summary); --c-practice-bg: var(--c-summary-bg); --c-practice-line: var(--c-summary-line);
+  background:var(--c-practice-bg); border-color:var(--c-practice-line);
+}
+.gp-box.tier-free .gp-box-title{ color:var(--c-practice); }
+.gp-box.tier-free .practice-item{ background:#fff; }
+
+/* ===== PRACTICE BLOCK ===== */
+.practice-item{
+  border:1.5px dashed var(--c-practice-line); border-radius:14px; padding:18px 20px; margin-bottom:18px; background:var(--c-practice-bg);
+}
+.practice-item .q-zh{ font-size:1.4rem; margin:0 0 10px; line-height:1.8; }
+.practice-item .q-vi{ font-size:1.12rem; color:var(--ink-soft); margin:0 0 10px; }
+.blank-line{
+  display:inline-block; min-width:220px; border-bottom:2px solid var(--c-practice); margin:0 4px;
+}
+.dialog-turn{ display:grid; grid-template-columns:2.6em 1.6em 1fr; column-gap:2px; align-items:baseline; }
+.dialog-turn .speaker{ font-weight:700; }
+.hint-word{ font-weight:700; color:var(--c-practice); white-space:nowrap; }
+.answer-box{
+  display:none; margin-top:10px; padding:12px 16px; background:#fff; border:1.5px solid var(--c-practice-line);
+  border-radius:10px; font-size:1.3rem; color:var(--c-practice); font-weight:700;
+}
+.answer-box.show{ display:block; }
+.reveal-btn{
+  background:var(--card-bg); border:1.5px solid var(--c-practice-line); color:var(--c-practice);
+  border-radius:999px; padding:7px 18px; font-weight:700; font-size:0.95rem; cursor:pointer;
+}
+.reveal-btn:hover{ background:var(--c-practice); color:#fff; }
+.reveal-all-bar{ display:flex; justify-content:flex-end; margin-bottom:10px; }
+.reveal-all-btn{
+  background:var(--c-practice); color:#fff; border:none; border-radius:999px; padding:8px 20px;
+  font-weight:700; font-size:0.95rem; cursor:pointer;
+}
+.reveal-all-btn:hover{ opacity:0.88; }
+
+/* ===== COMPARE (so sánh) ===== */
+.compare-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px; }
+.compare-col{ border-radius:16px; padding:18px 20px; }
+.compare-col.same{ background:var(--c-highlight-bg); border:1.5px solid var(--c-highlight-line); }
+.compare-col.diff{ background:var(--c-summary-bg); border:1.5px solid var(--c-summary-line); }
+.compare-col h3{ margin:0 0 12px; font-size:1.05rem; }
+.compare-col.same h3{ color:var(--c-highlight); }
+.compare-col.diff h3{ color:var(--c-summary); }
+.compare-item{ margin-bottom:14px; font-size:1.08rem; line-height:1.75; }
+.compare-item .zh{ font-size:1.2rem; }
+.compare-item .num{ font-weight:700; }
+@media (max-width:700px){ .compare-wrap{ grid-template-columns:1fr; } }
+
+/* ===== SUMMARY TABLE (bài tập tổng hợp) ===== */
+.sumtable{ width:100%; border-collapse:collapse; font-size:1.1rem; margin-top:14px; }
+.sumtable th{ background:var(--c-summary-bg); color:var(--c-summary); padding:12px 10px; border:1px solid var(--c-summary-line); text-align:center; white-space:nowrap; }
+.sumtable td{ padding:14px 12px; border:1px solid var(--card-line); text-align:left; vertical-align:middle; }
+.sumtable td.opt{ text-align:center; width:70px; font-weight:700; }
+.sumtable .zh{ font-size:1.5rem; }
+.sumtable .ans-cell{ color:var(--c-summary); font-weight:700; }
+.sumtable .ans-cell.hidden-ans{ visibility:hidden; }
+.sumtable .sum-explain-row{ display:none; }
+.sumtable .sum-explain-row.show{ display:table-row; }
+.sumtable .sum-explain{ background:var(--bg-app-2); font-size:0.92rem; color:var(--ink-soft); padding:8px 12px; border:1px solid var(--card-line); border-top:none; }
+
+/* ===== COMPARE BOXES (比一比) ===== */
+.compare-box{ border-radius:20px; padding:24px 28px; margin-bottom:24px; }
+.compare-box .box-title{ font-size:1.25rem; font-weight:800; margin:0 0 18px; }
+.compare-box.same{ background:var(--c-practice-bg); border:2px solid var(--c-practice-line); }
+.compare-box.same .box-title{ color:var(--c-practice); }
+.compare-box.diff{ background:var(--c-grammar-bg); border:2px solid var(--c-grammar-line); }
+.compare-box.diff .box-title{ color:var(--c-grammar); }
+.compare-point{ margin-bottom:20px; }
+.compare-point:last-child{ margin-bottom:0; }
+.compare-point .desc{ font-size:1.1rem; margin:0 0 10px; line-height:1.75; }
+.compare-box .ex-big{ font-size:1.6rem; line-height:1.8; background:#fff; border-radius:12px; padding:14px 18px; margin:0; }
+.gloss{ font-size:0.62em; color:var(--ink-soft); font-family:var(--font-latin); }
+
+.difftable{ width:100%; border-collapse:separate; border-spacing:0; margin-top:8px; background:#fff; border-radius:14px; overflow:hidden; border:1.5px solid var(--c-grammar-line); table-layout:fixed; }
+.difftable th{ background:var(--c-grammar); color:#fff; padding:13px 14px; font-size:1.1rem; text-align:center; border-bottom:1px solid var(--c-grammar); }
+.difftable th:not(:last-child){ border-right:1px solid rgba(255,255,255,0.35); }
+.difftable th:first-child{ width:19%; }
+.difftable th:nth-child(2), .difftable th:nth-child(3){ width:40.5%; }
+.difftable td{ padding:16px 18px; border-bottom:1px solid var(--c-grammar-line); border-right:1px solid var(--c-grammar-line); vertical-align:top; font-size:1.05rem; line-height:1.7; }
+.difftable td:last-child{ border-right:none; }
+.difftable tr:last-child td{ border-bottom:none; }
+.difftable tr:nth-child(even) td{ background:var(--bg-app-2); }
+.difftable td:first-child{ font-weight:700; color:var(--c-grammar); width:19%; text-align:left; vertical-align:middle; padding-left:16px; }
+.difftable td.opt{ text-align:center; font-size:1.4rem; font-weight:700; color:var(--c-grammar); }
+.difftable td .rule-line{ font-weight:700; color:var(--ink); }
+.difftable td .rule-note{ font-weight:400; color:var(--ink-soft); font-size:0.92em; display:block; margin-top:2px; }
+.difftable td .diff-badge{ display:inline-flex; align-items:center; gap:5px; padding:3px 14px; border-radius:999px; font-weight:800; font-size:1rem; }
+.difftable td .diff-badge.yes{ background:var(--c-practice-bg); color:var(--c-practice); border:1.5px solid var(--c-practice-line); }
+.difftable td .diff-badge.no{ background:var(--c-example-bg); color:var(--c-example); border:1.5px solid var(--c-example-line); }
+.difftable td .cell-ex{ display:block; margin-top:10px; font-size:1.15rem; line-height:1.85; color:var(--ink); padding-top:10px; border-top:1px dashed var(--c-grammar-line); }
+.difftable td .cell-ex .ex-row{ display:block; }
+.difftable td .cell-ex .ex-row + .ex-row{ margin-top:4px; }
+.compare-box.diff .example-list li{ background:#fff; }
+
+/* ===== RADIAL WORD DIAGRAM (同字词) ===== */
+.radial-wrap{ position:relative; width:100%; max-width:520px; aspect-ratio:1/1; margin:14px auto 30px; }
+.radial-lines{ position:absolute; inset:0; width:100%; height:100%; }
+.radial-lines line{ stroke:var(--c-expand-line); stroke-width:0.6; stroke-dasharray:2 2; }
+.radial-center{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:96px; height:96px; border-radius:50%; background:var(--c-expand); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:2.5rem; font-weight:700;
+  box-shadow:0 10px 24px rgba(198,103,42,0.35); z-index:2;
+}
+.radial-node{
+  position:absolute; transform:translate(-50%,-50%); width:140px; text-align:center;
+  background:#fff; border:1.5px solid var(--c-expand-line); border-radius:16px; padding:10px 10px;
+  box-shadow:0 6px 16px rgba(198,103,42,0.14); z-index:2;
+}
+.radial-node .w{ font-size:1.4rem; color:var(--c-expand); font-weight:700; }
+.radial-node .py{ font-size:0.82rem; color:var(--ink-soft); font-style:italic; margin:3px 0; }
+.radial-node .vi{ font-size:0.82rem; color:var(--ink); }
+
+.radial-fallback{ display:none; flex-direction:column; gap:10px; margin:14px 0 26px; }
+.radial-fallback .row{
+  display:flex; align-items:center; gap:12px; background:#fff; border:1.5px solid var(--c-expand-line);
+  border-radius:14px; padding:10px 14px;
+}
+.radial-fallback .badge{
+  width:44px; height:44px; border-radius:50%; background:var(--c-expand); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:1.2rem; font-weight:700; flex:0 0 auto;
+}
+.radial-fallback .w{ font-size:1.2rem; color:var(--c-expand); font-weight:700; }
+.radial-fallback .py{ font-size:0.82rem; color:var(--ink-soft); font-style:italic; }
+.radial-fallback .vi{ font-size:0.85rem; color:var(--ink); margin-left:auto; text-align:right; }
+@media (max-width:640px){
+  .radial-wrap{ display:none; }
+  .radial-fallback{ display:flex; }
+}
+.hl{ color:#B23A1E; font-weight:800; background:#FFE066; padding:1px 5px; border-radius:5px; box-shadow:0 1px 0 rgba(178,58,30,0.15); white-space:nowrap; }
+
+/* ===== GRAMMAR USAGE TABLE (bảng nhiều cách dùng) ===== */
+.gp-table-wrap{ overflow-x:auto; margin-bottom:4px; }
+.gp-table{ width:100%; border-collapse:collapse; font-size:1.02rem; table-layout:fixed; }
+.gp-table col.label-col-w{ width:96px; }
+.gp-table th{ background:var(--c-grammar-bg); color:var(--c-grammar); padding:10px 12px; border:1px solid var(--c-grammar-line); text-align:center; font-size:1.08rem; }
+.gp-table th.label-col{ background:var(--card-bg); border:none; }
+.gp-table td{ padding:12px 14px; border:1px solid var(--card-line); vertical-align:top; line-height:1.7; background:#fff; }
+.gp-table td.label{ background:var(--bg-app-2); font-weight:700; color:var(--ink); text-align:center; vertical-align:middle; padding-left:6px; padding-right:6px; font-size:0.94rem; line-height:1.3; }
+.gp-table .zh{ font-size:1.05rem; }
+.gp-table .ex-line{ display:block; margin-top:6px; }
+.gp-table .ex-line:first-child{ margin-top:0; }
+.gp-table .ex-cell{ font-size:1.35rem; line-height:2; }
+.gp-table .ex-cell .ex-line{ margin-top:10px; padding-top:10px; border-top:1px dashed var(--c-grammar-line); }
+.gp-table .ex-cell .ex-line:first-child{ margin-top:0; padding-top:0; border-top:none; }
+.gp-table .hl-1{ color:var(--c-grammar); font-weight:700; }
+.gp-table .hl-2{ color:var(--c-example); font-weight:700; }
+.gp-table .hl-3{ color:var(--c-expand); font-weight:700; }
+@media (max-width:700px){ .gp-table{ font-size:0.92rem; } .gp-table td, .gp-table th{ padding:8px 8px; } .gp-table col.label-col-w{ width:68px; } .gp-table .ex-cell{ font-size:1.12rem; } }
+@media (max-width:700px){
+  .difftable, .sumtable{ font-size:0.9rem; }
+  .difftable td, .difftable th, .sumtable td, .sumtable th{ padding:9px 8px; }
+  .difftable td:first-child{ width:auto; }
+  .difftable td .cell-ex, .sumtable .zh{ font-size:1.05rem; }
+}
+
+/* ===== EXPAND (同字词) ===== */
+.fill-item{
+  border:1.5px dashed var(--c-expand-line); border-radius:14px; padding:14px 18px; margin-bottom:12px; background:#fff;
+}
+.fill-item .q-zh{ font-size:1.15rem; margin:0; line-height:1.75; }
+.fill-blank{ display:inline-block; min-width:90px; border-bottom:2px solid var(--c-expand); margin:0 4px; }
+.fill-ans{
+  display:none; margin-top:8px; font-size:1.05rem; font-weight:700; color:var(--c-expand);
+}
+.fill-ans.show{ display:block; }
+.fill-reveal-btn{
+  background:var(--card-bg); border:1.5px solid var(--c-expand-line); color:var(--c-expand);
+  border-radius:999px; padding:6px 16px; font-weight:700; font-size:0.85rem; cursor:pointer; margin-top:8px;
+}
+.fill-reveal-btn:hover{ background:var(--c-expand); color:#fff; }
+
+/* ===== STRUCTURE CALLOUT (khung "CẤU TRÚC" nổi bật, theo mẫu ảnh) ===== */
+.structure-box{
+  position:relative; background:#fff; border:2px solid var(--c-example); border-radius:26px;
+  padding:32px 30px 24px; margin:22px 0 24px; text-align:center;
+}
+.structure-badge{
+  position:absolute; top:-17px; left:50%; transform:translateX(-50%);
+  background:var(--c-example); color:#fff; border-radius:999px; padding:7px 20px;
+  font-weight:700; font-size:0.8rem; letter-spacing:.04em; text-transform:uppercase;
+  display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
+  box-shadow:0 4px 10px var(--shadow-strong);
+}
+.structure-line{ font-size:1.35rem; line-height:2.1; color:var(--ink); }
+.structure-line + .structure-line{ margin-top:6px; }
+.structure-chip{
+  display:inline-block; background:var(--c-example-bg); color:var(--c-example);
+  border-radius:9px; padding:2px 12px; font-weight:700; margin:0 1px;
+}
+@media (max-width:600px){
+  .structure-box{ padding:28px 18px 20px; }
+  .structure-line{ font-size:1.1rem; }
+}
+
+.slide-footer-nav{ display:flex; justify-content:space-between; margin-top:26px; }
+.footer-btn{
+  background:var(--card-bg); border:1.5px solid var(--card-line); color:var(--ink); border-radius:999px;
+  padding:9px 20px; font-weight:700; font-size:0.9rem; cursor:pointer;
+}
+.footer-btn:hover{ background:var(--bg-app-2); }
+.footer-btn:disabled{ opacity:0.35; cursor:default; }
+
+@media (max-width:900px){
+  .sidebar{ width:var(--sidebar-w-collapsed) !important; transform:translateX(0); transition:width .28s ease; z-index:200; }
+  .sidebar .brand, .sidebar .sub{ opacity:0; }
+  .sidebar .nav-group summary, .sidebar .nav-single > button{ justify-content:center; padding:11px 0; }
+  .sidebar .nav-group summary .label, .sidebar .nav-group summary .chev,
+  .sidebar .nav-single > button .label, .sidebar .nav-item{ display:none; }
+  body.sidebar-collapsed .sidebar{ width:var(--sidebar-w) !important; box-shadow:14px 0 34px rgba(0,0,0,0.22); }
+  body.sidebar-collapsed .sidebar .brand, body.sidebar-collapsed .sidebar .sub{ opacity:1; }
+  body.sidebar-collapsed .nav-group summary, body.sidebar-collapsed .nav-single > button{ padding:11px 14px !important; justify-content:flex-start !important; }
+  body.sidebar-collapsed .nav-group summary .label, body.sidebar-collapsed .nav-group summary .chev,
+  body.sidebar-collapsed .nav-single > button .label, body.sidebar-collapsed .nav-item{ display:block !important; }
+  .content-col{ margin-left:var(--sidebar-w-collapsed) !important; }
+  body.sidebar-collapsed .content-col{ margin-left:var(--sidebar-w-collapsed) !important; }
+  .sidebar-backdrop{ display:none; }
+  body.sidebar-collapsed .sidebar-backdrop{ display:block; position:fixed; inset:0; background:rgba(20,14,4,0.45); z-index:150; }
+  .slide-card{ padding:24px 18px; }
+}
+</style>
+</head>
+<body class="on-cover">
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <div class="brand">HSK<span class="num-latin">4</span> · Bài <span class="num-latin">5</span></div>
+    <div class="sub"><span class="zh">只买对的，不买贵的</span> · Ngữ pháp</div>
+  </div>
+
+  <div class="nav-single">
+    <button class="active" data-slide="0" onclick="goTo(0)"><span class="emoji">🎬</span><span class="label zh">封面</span></button>
+  </div>
+
+  <details class="nav-group" data-slide="1" open>
+    <summary onclick="handleGroupClick(event, this)"><span class="emoji">1️⃣</span><span class="label zh">肯定</span><span class="chev">›</span></summary>
+    <button class="nav-item" data-slide="1" onclick="goTo(1)">📘 Giải thích</button>
+    <button class="nav-item" data-slide="2" onclick="goTo(2)">✍️ Luyện tập</button>
+  </details>
+  <details class="nav-group" data-slide="3">
+    <summary onclick="handleGroupClick(event, this)"><span class="emoji">2️⃣</span><span class="label zh">再说</span><span class="chev">›</span></summary>
+    <button class="nav-item" data-slide="3" onclick="goTo(3)">📘 Giải thích</button>
+    <button class="nav-item" data-slide="4" onclick="goTo(4)">✍️ Luyện tập</button>
+  </details>
+  <details class="nav-group" data-slide="5">
+    <summary onclick="handleGroupClick(event, this)"><span class="emoji">3️⃣</span><span class="label zh">实际</span><span class="chev">›</span></summary>
+    <button class="nav-item" data-slide="5" onclick="goTo(5)">📘 Giải thích</button>
+    <button class="nav-item" data-slide="6" onclick="goTo(6)">✍️ Luyện tập</button>
+  </details>
+  <details class="nav-group" data-slide="7">
+    <summary onclick="handleGroupClick(event, this)"><span class="emoji">4️⃣</span><span class="label zh">对……来说</span><span class="chev">›</span></summary>
+    <button class="nav-item" data-slide="7" onclick="goTo(7)">📘 Giải thích</button>
+    <button class="nav-item" data-slide="8" onclick="goTo(8)">✍️ Luyện tập</button>
+  </details>
+  <details class="nav-group" data-slide="9">
+    <summary onclick="handleGroupClick(event, this)"><span class="emoji">5️⃣</span><span class="label zh">尤其</span><span class="chev">›</span></summary>
+    <button class="nav-item" data-slide="9" onclick="goTo(9)">📘 Giải thích</button>
+    <button class="nav-item" data-slide="10" onclick="goTo(10)">✍️ Luyện tập</button>
+  </details>
+
+  <div class="nav-single">
+    <button data-slide="11" onclick="goTo(11)"><span class="emoji">⚖️</span><span class="label zh">比一比 · 尤其—特别</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="12" onclick="goTo(12)"><span class="emoji">📝</span><span class="label">Bài tập tổng hợp</span></button>
+  </div>
+  <div class="nav-single">
+    <button data-slide="13" onclick="goTo(13)"><span class="emoji">🔠</span><span class="label zh">同字词 · 准</span></button>
+  </div>
+</div>
+
+<div class="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+<div class="content-col" id="contentCol">
+  <div class="main">
+    <div class="top-bar">
+      <button class="fullscreen-toggle" id="fullscreenBtn" onclick="toggleFullscreen()" title="Toàn màn hình">⛶</button>
+    </div>
+
+    <div id="slidesContainer">
+
+      <!-- SLIDE 0: COVER -->
+      <div class="slide cover-slide active" id="slide-0">
+        <div class="slide-card">
+          <div class="cover-badge">HSK<span class="num-latin">4</span> · Bài <span class="num-latin">5</span> · Ngữ pháp trọng tâm</div>
+          <h1 class="zh">只买对的，不买贵的。</h1>
+          <div class="cover-vi"><span class="num-latin">5</span> điểm ngữ pháp cần nắm</div>
+          <div class="cover-points">
+            <span class="cover-point-chip zh">肯定</span>
+            <span class="cover-point-chip zh">再说</span>
+            <span class="cover-point-chip zh">实际</span>
+            <span class="cover-point-chip zh">对……来说</span>
+            <span class="cover-point-chip zh">尤其</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 1: 肯定 -->
+      <div class="slide" id="slide-1">
+        <div class="slide-card">
+          <span class="eyebrow grammar">📘 <span class="zh">语法点 <span class="num-latin">1</span></span> · Điểm ngữ pháp <span class="num-latin">1</span></span>
+          <div class="gpoint-head"><span class="gpoint-num"><span class="num-latin">1</span></span><h2 class="zh">肯定</h2></div>
+          <p class="subtitle"><span class="num-latin">3</span> cách dùng: phó từ · tính từ (chắc chắn, rõ ràng) · tính từ (thừa nhận, đúng)</p>
+
+          <div class="gp-box gp-explain">
+            <div class="gp-box-title">📘 Giải thích — <span class="num-latin">3</span> cách dùng</div>
+
+            <div class="usage-box u1">
+              <div class="usage-head">
+                <span class="usage-num">1</span>
+                <span class="usage-title zh">肯定</span>
+                <span class="usage-tag">— Phó từ</span>
+              </div>
+              <ul class="theory-list">
+                <li><b>Nghĩa:</b> <i>nhất định, không nghi ngờ</i> — biểu thị mức độ chắc chắn của người nói về sự việc</li>
+                <li><b>Cấu trúc:</b> <span class="zh">肯定</span> + Động từ / Tính từ — đứng trước vị ngữ, bổ nghĩa cho cả câu</li>
+              </ul>
+              <ul class="example-list">
+                <li class="zh">您放心，质量<span class="hl">肯定</span>不"打折"。</li>
+                <li class="zh">每天喝一点儿葡萄酒对身体有好处，但不能喝太多——喝太多酒<span class="hl">肯定</span>对身体不好。</li>
+              </ul>
+            </div>
+
+            <div class="usage-box u2">
+              <div class="usage-head">
+                <span class="usage-num">2</span>
+                <span class="usage-title zh">肯定</span>
+                <span class="usage-tag">— Tính từ (chắc chắn, rõ ràng)</span>
+              </div>
+              <ul class="theory-list">
+                <li><b>Nghĩa:</b> <i>chắc chắn, rõ ràng, xác định</i></li>
+                <li><b>Cấu trúc:</b> <span class="zh">不</span> + <span class="zh">肯定</span> / <span class="zh">肯定</span> + <span class="zh">的</span> + Danh từ — làm vị ngữ hoặc định ngữ</li>
+              </ul>
+              <ul class="example-list">
+                <li class="zh">不能<span class="hl">肯定</span>的事、没发生过的事，最好不要说。</li>
+              </ul>
+            </div>
+
+            <div class="usage-box u3">
+              <div class="usage-head">
+                <span class="usage-num">3</span>
+                <span class="usage-title zh">肯定</span>
+                <span class="usage-tag">— Tính từ (thừa nhận, đúng)</span>
+              </div>
+              <ul class="theory-list">
+                <li><b>Nghĩa:</b> <i>thừa nhận, đúng</i> — mang tính khẳng định/tích cực (đối lập với <span class="zh">否定</span> "phủ định")</li>
+                <li><b>Cấu trúc:</b> Thường làm vị ngữ, hay xuất hiện ở dạng "…都是<span class="zh">肯定</span>的"</li>
+              </ul>
+              <ul class="example-list">
+                <li class="zh">"你羡慕浪漫的爱情吗？"相信大部分人的回答都是<span class="hl">肯定</span>的。</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SLIDE 2: 肯定 - LUYỆN TẬP -->
+      <div class="slide" id="slide-2">
+        <div class="slide-card">
+          <span class="eyebrow practice">✍️ <span class="zh">练习 <span class="num-latin">1</span></span> · Luyện tập điểm <span class="num-latin">1</span></span>
+          <div class="gpoint-head"><span class="gpoint-num"><span class="num-latin">1</span></span><h2 class="zh">肯定</h2></div>
+          <p class="subtitle">Luyện tập — <span class="num-latin">3</span> cách dùng: phó từ · tính từ (chắc chắn, rõ ràng) · tính từ (thừa nhận, đúng)</p>
+
+          <div class="gp-box tier-mechanical">
+            <div class="gp-box-title">🔧 Luyện cơ học <span class="zh" style="font-size:0.9rem;font-weight:400;">· 机械性练习</span></div>
+            <p class="q-vi" style="margin-top:-2px;margin-bottom:10px;"><span class="zh">辨别用法</span> · Xác định <span class="zh" style="font-weight:700;">肯定</span> trong mỗi câu sau thuộc cách dùng nào (① phó từ / ② tính từ "chắc chắn" / ③ tính từ "thừa nhận")</p>
+
+            <div class="reveal-all-bar"><button class="reveal-all-btn" onclick="revealGroup('m1')">👁️ Xem tất cả đáp án</button></div>
+
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（1）</span>我今天<span class="hint-word">肯定</span>要把作业做完。</p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box m1">① Phó từ — bổ nghĩa cho động từ "要...做完", nghĩa "nhất định".</div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（2）</span>这件事还不能<span class="hint-word">肯定</span>，得再调查一下。</p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box m1">② Tính từ — làm vị ngữ sau "不能", nghĩa "chắc chắn, rõ ràng, xác định".</div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（3）</span>老师对他这次的表现给了<span class="hint-word">肯定</span>的评价。</p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box m1">③ Tính từ — làm định ngữ trước "评价" (肯定的+N), nghĩa "thừa nhận, mang tính tích cực".</div>
+            </div>
+          </div>
+
+          <div class="gp-box gp-practice">
+            <div class="gp-box-title">💪 Luyện bán giao tiếp <span class="zh" style="font-size:0.9rem;font-weight:400;">· 半机械性练习</span></div>
+            <p class="q-vi" style="margin-top:-2px;margin-bottom:10px;"><span class="zh">完成对话</span> · Hoàn thành các đoạn đối thoại sau <span class="zh" style="font-weight:700;">(肯定)</span></p>
+
+            <div class="reveal-all-bar"><button class="reveal-all-btn" onclick="revealGroup('p1')">👁️ Xem tất cả đáp án</button></div>
+
+            <div class="practice-item">
+              <p class="q-zh zh dialog-turn"><span class="q-num"><span class="num-latin">（1）</span></span><span class="speaker">A：</span><span class="content">那个公园几点关门？</span></p>
+              <p class="q-zh zh dialog-turn"><span class="q-num"></span><span class="speaker">B：</span><span class="content">可能是六点，也可能是六点半，<span class="blank-line"></span>。<span class="hint-word zh">（肯定）</span></span></p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box p1"><span class="zh">B：可能是六点，也可能是六点半，我也不太肯定，你最好再打电话问问。</span></div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh dialog-turn"><span class="q-num"><span class="num-latin">（2）</span></span><span class="speaker">A：</span><span class="content">快点儿，不早了，咱们别迟到了。</span></p>
+              <p class="q-zh zh dialog-turn"><span class="q-num"></span><span class="speaker">B：</span><span class="content">你放心，<span class="blank-line"></span>。<span class="hint-word zh">（肯定）</span></span></p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box p1"><span class="zh">B：你放心，我们肯定不会迟到的。</span></div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh dialog-turn"><span class="q-num"><span class="num-latin">（3）</span></span><span class="speaker">A：</span><span class="content">那份调查下个月能完成吗？</span></p>
+              <p class="q-zh zh dialog-turn"><span class="q-num"></span><span class="speaker">B：</span><span class="content">没问题，<span class="blank-line"></span>。<span class="hint-word zh">（肯定）</span></span></p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box p1"><span class="zh">B：没问题，下个月肯定能完成。</span></div>
+            </div>
+            <p class="q-vi" style="text-align:center;margin-top:6px;">* Đáp án minh hoạ — có thể chấp nhận câu trả lời hợp lý khác của học viên.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SLIDE 3: 再说 - GIẢI THÍCH -->
+      <div class="slide" id="slide-3">
+        <div class="slide-card">
+          <span class="eyebrow grammar">📘 <span class="zh">语法点 <span class="num-latin">2</span></span> · Điểm ngữ pháp <span class="num-latin">2</span></span>
+          <div class="gpoint-head"><span class="gpoint-num"><span class="num-latin">2</span></span><h2 class="zh">再说</h2></div>
+          <p class="subtitle"><span class="num-latin">2</span> cách dùng: động từ · liên từ</p>
+
+          <div class="gp-box gp-explain">
+            <div class="gp-box-title">📘 Giải thích — <span class="num-latin">2</span> cách dùng</div>
+
+            <div class="usage-box u1">
+              <div class="usage-head">
+                <span class="usage-num">1</span>
+                <span class="usage-title zh">再说</span>
+                <span class="usage-tag">— Động từ</span>
+              </div>
+              <ul class="theory-list">
+                <li><b>Nghĩa:</b> Gác lại (việc gì) để giải quyết hay suy xét sau</li>
+                <li><b>Cấu trúc:</b> Thường đứng cuối câu, dạng "…<span class="zh">再说</span>" / "…<span class="zh">再说吧</span>"</li>
+              </ul>
+              <ul class="example-list">
+                <li class="zh">现在的事，做了<span class="hl">再说</span>；以后的事，以后<span class="hl">再说</span>。</li>
+                <li class="zh">
+                  <div class="dialog-ex">
+                    <p class="dialog-line"><span class="speaker">A：</span><span class="content">你不是很喜欢那件大衣吗？怎么不买了呢？</span></p>
+                    <p class="dialog-line"><span class="speaker">B：</span><span class="content">我真的很喜欢，不过没我的号了，下次<span class="hl">再说</span>吧。</span></p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usage-box u2">
+              <div class="usage-head">
+                <span class="usage-num">2</span>
+                <span class="usage-title zh">再说</span>
+                <span class="usage-tag">— Liên từ</span>
+              </div>
+              <ul class="theory-list">
+                <li><b>Nghĩa:</b> Bổ sung một tình huống/lý do nữa cho điều đã được đề cập trước đó — "hơn nữa, vả lại"</li>
+                <li><b>Cấu trúc:</b> Câu 1 (lý do <span class="num-latin">1</span>)。<span class="zh">再说</span>，Câu 2 (lý do <span class="num-latin">2</span> bổ sung)</li>
+              </ul>
+              <ul class="example-list">
+                <li class="zh">今天买的东西太多了。<span class="hl">再说</span>，这个月家里已经花了五千多了。</li>
+                <li class="zh">
+                  <div class="dialog-ex">
+                    <p class="dialog-line"><span class="speaker">A：</span><span class="content">你飞机几点的？怎么还不准备？</span></p>
+                    <p class="dialog-line"><span class="speaker">B：</span><span class="content">晚上八点的，不用急，<span class="hl">再说</span>，我就去几天，不用带多少东西。</span></p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SLIDE 4: 再说 - LUYỆN TẬP -->
+      <div class="slide" id="slide-4">
+        <div class="slide-card">
+          <span class="eyebrow practice">✍️ <span class="zh">练习 <span class="num-latin">2</span></span> · Luyện tập điểm <span class="num-latin">2</span></span>
+          <div class="gpoint-head"><span class="gpoint-num"><span class="num-latin">2</span></span><h2 class="zh">再说</h2></div>
+          <p class="subtitle">Luyện tập — <span class="num-latin">2</span> cách dùng: động từ · liên từ</p>
+
+          <div class="gp-box tier-mechanical">
+            <div class="gp-box-title">🔧 Luyện cơ học <span class="zh" style="font-size:0.9rem;font-weight:400;">· 机械性练习</span></div>
+            <p class="q-vi" style="margin-top:-2px;margin-bottom:10px;"><span class="zh">辨别用法</span> · Xác định <span class="zh" style="font-weight:700;">再说</span> trong mỗi câu sau thuộc cách dùng nào (① động từ / ② liên từ)</p>
+
+            <div class="reveal-all-bar"><button class="reveal-all-btn" onclick="revealGroup('m2')">👁️ Xem tất cả đáp án</button></div>
+
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（1）</span>这件事挺麻烦的，等我想清楚了<span class="hint-word">再说</span>。</p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box m2">① Động từ — đứng cuối câu, nghĩa "gác lại, để sau (khi nghĩ rõ) hẵng tính".</div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（2）</span>时间不早了，<span class="hint-word">再说</span>我们也累了，明天再去吧。</p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box m2">② Liên từ — nối 2 lý do, bổ sung thêm lý do "cũng mệt rồi" cho việc để mai đi.</div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（3）</span>这个问题有点儿复杂，我们下班以后<span class="hint-word">再说</span>吧。</p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box m2">① Động từ — đứng cuối câu ("…再说吧"), nghĩa "để sau khi tan làm hẵng bàn".</div>
+            </div>
+          </div>
+
+          <div class="gp-box gp-practice">
+            <div class="gp-box-title">💪 Luyện bán giao tiếp <span class="zh" style="font-size:0.9rem;font-weight:400;">· 半机械性练习</span></div>
+            <p class="q-vi" style="margin-top:-2px;margin-bottom:10px;"><span class="zh">完成句子或对话</span> · Hoàn thành câu/đoạn đối thoại sau <span class="zh" style="font-weight:700;">(再说)</span></p>
+
+            <div class="reveal-all-bar"><button class="reveal-all-btn" onclick="revealGroup('p2')">👁️ Xem tất cả đáp án</button></div>
+
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（1）</span>你身体不好，<span class="blank-line"></span>，你就别去了。<span class="hint-word zh">（再说）</span></p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box p2"><span class="zh">你身体不好，再说，外面天气也不好，你就别去了。</span></div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh dialog-turn"><span class="q-num"><span class="num-latin">（2）</span></span><span class="speaker">A：</span><span class="content">这个商场的衣服正在打折，咱们多买几件吧。</span></p>
+              <p class="q-zh zh dialog-turn"><span class="q-num"></span><span class="speaker">B：</span><span class="content">钱不够了，<span class="blank-line"></span>。<span class="hint-word zh">（再说）</span></span></p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box p2"><span class="zh">B：钱不够了，再说，我也不缺什么衣服，还是别买了。</span></div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh dialog-turn"><span class="q-num"><span class="num-latin">（3）</span></span><span class="speaker">A：</span><span class="content">这次旅行你参加吗？</span></p>
+              <p class="q-zh zh dialog-turn"><span class="q-num"></span><span class="speaker">B：</span><span class="content">我不想参加，因为我最近比较忙，<span class="blank-line"></span>。<span class="hint-word zh">（再说）</span></span></p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box p2"><span class="zh">B：我不想参加，因为我最近比较忙，这次旅行的事以后再说吧。</span></div>
+            </div>
+            <p class="q-vi" style="text-align:center;margin-top:6px;">* Đáp án minh hoạ — có thể chấp nhận câu trả lời hợp lý khác của học viên.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SLIDE 5: 实际 - GIẢI THÍCH -->
+      <div class="slide" id="slide-5">
+        <div class="slide-card">
+          <span class="eyebrow grammar">📘 <span class="zh">语法点 <span class="num-latin">3</span></span> · Điểm ngữ pháp <span class="num-latin">3</span></span>
+          <div class="gpoint-head"><span class="gpoint-num"><span class="num-latin">3</span></span><h2 class="zh">实际</h2></div>
+          <p class="subtitle"><span class="num-latin">3</span> cách dùng: danh từ · tính từ · phó từ (<span class="zh">实际上</span>)</p>
+
+          <div class="gp-box gp-explain">
+            <div class="gp-box-title">📘 Giải thích — <span class="num-latin">3</span> cách dùng</div>
+
+            <div class="usage-box u1">
+              <div class="usage-head">
+                <span class="usage-num">1</span>
+                <span class="usage-title zh">实际</span>
+                <span class="usage-tag">— Danh từ</span>
+              </div>
+              <ul class="theory-list">
+                <li><b>Nghĩa:</b> Sự vật/tình huống tồn tại khách quan</li>
+                <li><b>Cấu trúc:</b> Thường làm tân ngữ sau động từ như <span class="zh">联系／结合</span> + <span class="zh">实际</span></li>
+              </ul>
+              <ul class="example-list">
+                <li class="zh">你们做计划应该联系<span class="hl">实际</span>。</li>
+              </ul>
+            </div>
+
+            <div class="usage-box u2">
+              <div class="usage-head">
+                <span class="usage-num">2</span>
+                <span class="usage-title zh">实际</span>
+                <span class="usage-tag">— Tính từ</span>
+              </div>
+              <ul class="theory-list">
+                <li><b>Nghĩa:</b> <i>thực tế, cụ thể</i></li>
+                <li><b>Cấu trúc:</b> Làm định ngữ hoặc vị ngữ, đứng trước danh từ/động từ</li>
+              </ul>
+              <ul class="example-list">
+                <li class="zh">
+                  <div class="dialog-ex">
+                    <p class="dialog-line"><span class="speaker">A：</span><span class="content">听说你大学二年级的时候就开始在广告公司工作了。这样做不会影响你的学习吗？</span></p>
+                    <p class="dialog-line"><span class="speaker">B：</span><span class="content">我认为不会，<span class="hl">实际</span>工作能让我更理解书本上的知识。</span></p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usage-box u3">
+              <div class="usage-head">
+                <span class="usage-num">3</span>
+                <span class="usage-title zh">实际上</span>
+                <span class="usage-tag">— Phó từ</span>
+              </div>
+              <ul class="theory-list">
+                <li><b>Nghĩa:</b> <i>trong thực tế</i> — thường mang ý chuyển ý, đối lập với điều vừa nói trước đó</li>
+                <li><b>Cấu trúc:</b> <span class="zh">实际上</span>，+ câu — thường đứng đầu câu, sau khi đã nêu <span class="num-latin">1</span> ý/nhận định trước đó</li>
+              </ul>
+              <ul class="example-list">
+                <li class="zh">要想别人对你好，你先对别人好。<span class="hl">实际上</span>，我们很多人做不到这一点。</li>
+                <li class="zh">广告只会介绍优点，却不会说它的缺点。<span class="hl">实际上</span>，很多东西并不像广告上说的那么好，所以不能完全相信广告。</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SLIDE 6: 实际 - LUYỆN TẬP -->
+      <div class="slide" id="slide-6">
+        <div class="slide-card">
+          <span class="eyebrow practice">✍️ <span class="zh">练习 <span class="num-latin">3</span></span> · Luyện tập điểm <span class="num-latin">3</span></span>
+          <div class="gpoint-head"><span class="gpoint-num"><span class="num-latin">3</span></span><h2 class="zh">实际</h2></div>
+          <p class="subtitle">Luyện tập — <span class="num-latin">3</span> cách dùng: danh từ · tính từ · phó từ (<span class="zh">实际上</span>)</p>
+
+          <div class="gp-box tier-mechanical">
+            <div class="gp-box-title">🔧 Luyện cơ học <span class="zh" style="font-size:0.9rem;font-weight:400;">· 机械性练习</span></div>
+            <p class="q-vi" style="margin-top:-2px;margin-bottom:10px;"><span class="zh">辨别用法</span> · Xác định <span class="zh" style="font-weight:700;">实际</span> trong mỗi câu sau thuộc cách dùng nào (① danh từ / ② tính từ / ③ phó từ 实际上)</p>
+
+            <div class="reveal-all-bar"><button class="reveal-all-btn" onclick="revealGroup('m3')">👁️ Xem tất cả đáp án</button></div>
+
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（1）</span>做计划的时候要多考虑<span class="hint-word">实际</span>情况。</p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box m3">② Tính từ — làm định ngữ trước "情况" (实际+N), nghĩa "thực tế".</div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（2）</span>你说得很有道理，可是跟<span class="hint-word">实际</span>有些不一样。</p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box m3">① Danh từ — làm tân ngữ sau giới từ "跟", chỉ "thực tế" như một sự vật khách quan.</div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（3）</span>大家都以为他很有钱，<span class="hint-word">实际上</span>他压力很大，欠了不少债。</p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box m3">③ Phó từ (实际上) — đứng đầu vế câu, chuyển ý đối lập với điều vừa nói trước đó.</div>
+            </div>
+          </div>
+
+          <div class="gp-box gp-practice">
+            <div class="gp-box-title">💪 Luyện bán giao tiếp <span class="zh" style="font-size:0.9rem;font-weight:400;">· 半机械性练习</span></div>
+            <p class="q-vi" style="margin-top:-2px;margin-bottom:10px;"><span class="zh">完成句子或对话</span> · Hoàn thành câu/đoạn đối thoại sau</p>
+
+            <div class="reveal-all-bar"><button class="reveal-all-btn" onclick="revealGroup('p3')">👁️ Xem tất cả đáp án</button></div>
+
+            <div class="practice-item">
+              <p class="q-zh zh dialog-turn"><span class="q-num"><span class="num-latin">（1）</span></span><span class="speaker">A：</span><span class="content">小说里的爱情总是很吸引人，男的很帅，女的很漂亮，他们经常唱歌跳舞，一起去世界各地旅游。</span></p>
+              <p class="q-zh zh dialog-turn"><span class="q-num"></span><span class="speaker">B：</span><span class="content">但这到底只是故事，<span class="blank-line"></span>。<span class="hint-word zh">（实际）</span></span></p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box p3"><span class="zh">B：但这到底只是故事，跟实际生活不一样。</span></div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（2）</span>"<span class="zh">光说不练</span>"的意思是有些人只是嘴上说，<span class="blank-line"></span>。<span class="hint-word zh">（实际上）</span></p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box p3"><span class="zh">"光说不练"的意思是有些人只是嘴上说，实际上并没有真正去做。</span></div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（3）</span>有些人喜欢不停地换工作，他们总以为新工作一定比现在的好，<span class="blank-line"></span>。<span class="hint-word zh">（实际上）</span></p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box p3"><span class="zh">有些人喜欢不停地换工作，他们总以为新工作一定比现在的好，实际上不一定是这样。</span></div>
+            </div>
+            <p class="q-vi" style="text-align:center;margin-top:6px;">* Đáp án minh hoạ — có thể chấp nhận câu trả lời hợp lý khác của học viên.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SLIDE 7: 对……来说 - GIẢI THÍCH -->
+      <div class="slide" id="slide-7">
+        <div class="slide-card">
+          <span class="eyebrow grammar">📘 <span class="zh">语法点 <span class="num-latin">4</span></span> · Điểm ngữ pháp <span class="num-latin">4</span></span>
+          <div class="gpoint-head"><span class="gpoint-num"><span class="num-latin">4</span></span><h2 class="zh">对……来说</h2></div>
+          <p class="subtitle">Cụm giới từ cố định, đứng từ một góc độ nào đó để nhìn nhận vấn đề</p>
+
+          <div class="structure-box">
+            <span class="structure-badge">📐 Cấu trúc</span>
+            <div class="structure-line"><span class="structure-chip zh">对</span> + Danh từ/Đại từ (góc nhìn) + <span class="structure-chip zh">来说</span>，+ câu nhận xét</div>
+          </div>
+
+          <div class="gp-box gp-explain">
+            <div class="gp-box-title">📘 Giải thích</div>
+            <div class="explain-box">
+              <ul class="theory-list">
+                <li><b>Loại từ:</b> Cụm giới từ cố định</li>
+                <li><b>Nghĩa:</b> "đối với… mà nói" — diễn tả việc nhìn nhận, đánh giá vấn đề từ góc độ/lập trường của một người hoặc sự vật cụ thể</li>
+                <li><b>Ngữ dụng:</b> Thường đứng đầu câu; hay dùng để so sánh góc nhìn khác nhau giữa hai đối tượng (<span class="zh">对…来说…，但是／可是对…来说…</span>)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="gp-box gp-example">
+            <div class="gp-box-title">✏️ Ví dụ</div>
+            <ul class="example-list">
+              <li class="zh"><span class="hl">对</span>我<span class="hl">来说</span>，衣服的样子流行不流行并不是很重要。</li>
+              <li class="zh"><span class="hl">对</span>一个女人<span class="hl">来说</span>，漂亮、聪明都很重要，但其实更重要的是快乐。</li>
+              <li class="zh">一杯水，<span class="hl">对</span>一条小鱼<span class="hl">来说</span>，可能很有帮助，它可以在里面游得很好。但是，<span class="hl">对</span>一条大鱼<span class="hl">来说</span>，一杯水是没有什么帮助的，它需要的是一条河。</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SLIDE 8: 对……来说 - LUYỆN TẬP -->
+      <div class="slide" id="slide-8">
+        <div class="slide-card">
+          <span class="eyebrow practice">✍️ <span class="zh">练习 <span class="num-latin">4</span></span> · Luyện tập điểm <span class="num-latin">4</span></span>
+          <div class="gpoint-head"><span class="gpoint-num"><span class="num-latin">4</span></span><h2 class="zh">对……来说</h2></div>
+          <p class="subtitle">Luyện tập — cụm giới từ cố định, đứng từ một góc độ nào đó để nhìn nhận vấn đề</p>
+
+          <div class="gp-box tier-mechanical">
+            <div class="gp-box-title">🔧 Luyện cơ học <span class="zh" style="font-size:0.9rem;font-weight:400;">· 机械性练习</span></div>
+            <p class="q-vi" style="margin-top:-2px;margin-bottom:10px;"><span class="zh">判断对错</span> · Phán đoán câu sau dùng đúng hay sai vị trí <span class="zh" style="font-weight:700;">对……来说</span></p>
+
+            <div class="reveal-all-bar"><button class="reveal-all-btn" onclick="revealGroup('m4')">👁️ Xem tất cả đáp án</button></div>
+
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（1）</span>对学生来说，考试压力很大。</p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box m4">✓ Đúng — đúng cấu trúc "对+N+来说，+câu nhận xét".</div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（2）</span>来说对老人，健康最重要。</p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box m4">✕ Sai — đảo sai trật tự, phải viết lại: <span class="zh">对老人来说，健康最重要。</span></div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（3）</span>这道题对来说我很难。</p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box m4">✕ Sai — "来说" bị chen vào giữa "对" và đối tượng, phải viết lại: <span class="zh">这道题对我来说很难。</span></div>
+            </div>
+          </div>
+
+          <div class="gp-box gp-practice">
+            <div class="gp-box-title">💪 Luyện bán giao tiếp <span class="zh" style="font-size:0.9rem;font-weight:400;">· 半机械性练习</span></div>
+            <p class="q-vi" style="margin-top:-2px;margin-bottom:10px;"><span class="zh">完成句子</span> · Hoàn thành các câu sau <span class="zh" style="font-weight:700;">(对……来说)</span></p>
+
+            <div class="reveal-all-bar"><button class="reveal-all-btn" onclick="revealGroup('p4')">👁️ Xem tất cả đáp án</button></div>
+
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（1）</span>出国留学<span class="blank-line"></span>。<span class="hint-word zh">（对……来说）</span></p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box p4"><span class="zh">出国留学对我来说是一次很难得的机会。</span></div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（2）</span>北京是个不错的地方，特别是<span class="blank-line"></span>。<span class="hint-word zh">（对……来说）</span></p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box p4"><span class="zh">北京是个不错的地方，特别是对喜欢历史文化的人来说，这里有很多值得看的地方。</span></div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（3）</span>妈妈总是为我结婚的事情着急，但是我觉得自己还很年轻，不想这么早结婚<span class="blank-line"></span>。<span class="hint-word zh">（对……来说）</span></p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box p4"><span class="zh">妈妈总是为我结婚的事情着急，但是我觉得自己还很年轻，不想这么早结婚，对我来说，先把工作做好更重要。</span></div>
+            </div>
+            <p class="q-vi" style="text-align:center;margin-top:6px;">* Đáp án minh hoạ — có thể chấp nhận câu trả lời hợp lý khác của học viên.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SLIDE 9: 尤其 - GIẢI THÍCH -->
+      <div class="slide" id="slide-9">
+        <div class="slide-card">
+          <span class="eyebrow grammar">📘 <span class="zh">语法点 <span class="num-latin">5</span></span> · Điểm ngữ pháp <span class="num-latin">5</span></span>
+          <div class="gpoint-head"><span class="gpoint-num"><span class="num-latin">5</span></span><h2 class="zh">尤其</h2></div>
+          <p class="subtitle">Phó từ, chỉ mức độ tăng thêm — nhấn mạnh khía cạnh nổi bật nhất trong một tình huống tổng thể</p>
+
+          <div class="structure-box">
+            <span class="structure-badge">📐 Cấu trúc</span>
+            <div class="structure-line">Vế 1 (tình huống tổng thể)，<span class="structure-chip zh">尤其（是）</span> + khía cạnh/đối tượng nổi bật nhất</div>
+          </div>
+
+          <div class="gp-box gp-explain">
+            <div class="gp-box-title">📘 Giải thích</div>
+            <div class="explain-box">
+              <ul class="theory-list">
+                <li><b>Loại từ:</b> Phó từ</li>
+                <li><b>Nghĩa:</b> "đặc biệt là, nhất là" — chỉ mức độ tăng thêm, nhấn mạnh khía cạnh nổi bật nhất trong một tình huống tổng thể đã nêu ở vế trước</li>
+                <li><b>Ngữ dụng:</b> Vế câu thứ nhất thường đưa ra một tình huống tổng thể, vế câu thứ hai dùng <span class="zh">尤其</span> để chỉ ra khía cạnh nổi bật nhất trong tình huống tổng thể đó; có thể kết hợp với <span class="zh">是</span> (<span class="zh">尤其是</span>) hoặc không</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="gp-box gp-example">
+            <div class="gp-box-title">✏️ Ví dụ</div>
+            <ul class="example-list">
+              <li class="zh">您女儿真可爱，长得真像您，<span class="hl">尤其</span>是眼睛。</li>
+              <li class="zh">现在网上购物变得越来越流行了，年轻人<span class="hl">尤其</span>喜欢在网上买东西。</li>
+              <li class="zh">为了健康，我们应该每年都去医院做一次身体检查，<span class="hl">尤其</span>是那些四五十岁的人，这样可以早一些发现问题。</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SLIDE 10: 尤其 - LUYỆN TẬP -->
+      <div class="slide" id="slide-10">
+        <div class="slide-card">
+          <span class="eyebrow practice">✍️ <span class="zh">练习 <span class="num-latin">5</span></span> · Luyện tập điểm <span class="num-latin">5</span></span>
+          <div class="gpoint-head"><span class="gpoint-num"><span class="num-latin">5</span></span><h2 class="zh">尤其</h2></div>
+          <p class="subtitle">Luyện tập — phó từ, chỉ mức độ tăng thêm, nhấn mạnh khía cạnh nổi bật nhất</p>
+
+          <div class="gp-box tier-mechanical">
+            <div class="gp-box-title">🔧 Luyện cơ học <span class="zh" style="font-size:0.9rem;font-weight:400;">· 机械性练习</span></div>
+            <p class="q-vi" style="margin-top:-2px;margin-bottom:10px;"><span class="zh">判断对错</span> · Phán đoán câu sau dùng đúng hay sai vị trí <span class="zh" style="font-weight:700;">尤其</span></p>
+
+            <div class="reveal-all-bar"><button class="reveal-all-btn" onclick="revealGroup('m5')">👁️ Xem tất cả đáp án</button></div>
+
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（1）</span>我喜欢吃水果，尤其是苹果。</p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box m5">✓ Đúng — vế tổng thể (thích ăn hoa quả) đứng trước, vế nổi bật (táo) đứng sau cùng "尤其是".</div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（2）</span>尤其是苹果，我喜欢吃水果。</p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box m5">✕ Sai — "尤其" không thể đứng trước để mở đầu câu khi chưa có vế tổng thể; phải viết lại: <span class="zh">我喜欢吃水果，尤其是苹果。</span></div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（3）</span>这次旅行大家都很开心，尤其小孩子们，玩得特别高兴。</p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box m5">✓ Đúng — "尤其" có thể dùng không kèm "是" vẫn đúng ngữ pháp.</div>
+            </div>
+          </div>
+
+          <div class="gp-box gp-practice">
+            <div class="gp-box-title">💪 Luyện bán giao tiếp <span class="zh" style="font-size:0.9rem;font-weight:400;">· 半机械性练习</span></div>
+            <p class="q-vi" style="margin-top:-2px;margin-bottom:10px;"><span class="zh">完成句子</span> · Hoàn thành các câu sau <span class="zh" style="font-weight:700;">(尤其)</span></p>
+
+            <div class="reveal-all-bar"><button class="reveal-all-btn" onclick="revealGroup('p5')">👁️ Xem tất cả đáp án</button></div>
+
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（1）</span>我特别喜欢运动，<span class="blank-line"></span>。<span class="hint-word zh">（尤其）</span></p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box p5"><span class="zh">我特别喜欢运动，尤其是打篮球。</span></div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（2）</span>这家店的面条做得很不错，<span class="blank-line"></span>。<span class="hint-word zh">（尤其）</span></p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box p5"><span class="zh">这家店的面条做得很不错，尤其是牛肉面，特别好吃。</span></div>
+            </div>
+            <div class="practice-item">
+              <p class="q-zh zh"><span class="num-latin">（3）</span>无论做什么事情，都要注意方法，<span class="blank-line"></span>。<span class="hint-word zh">（尤其）</span></p>
+              <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+              <div class="answer-box p5"><span class="zh">无论做什么事情，都要注意方法，尤其是刚开始的时候。</span></div>
+            </div>
+            <p class="q-vi" style="text-align:center;margin-top:6px;">* Đáp án minh hoạ — có thể chấp nhận câu trả lời hợp lý khác của học viên.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SLIDE 11: SO SANH 尤其 - 特别 -->
+      <div class="slide" id="slide-11">
+        <div class="slide-card">
+          <span class="eyebrow review">⚖️ <span class="zh">比一比</span> · So sánh</span>
+          <h2 class="zh">尤其 — 特别</h2>
+          <p class="subtitle">Điểm giống nhau và khác nhau giữa <span class="zh">尤其</span> và <span class="zh">特别</span></p>
+
+          <div class="compare-box same">
+            <p class="box-title">✅ Điểm giống nhau</p>
+            <div class="compare-point">
+              <p class="desc">Cả hai đều có thể làm <b>phó từ</b>, chỉ khía cạnh nổi bật nhất trong tổng thể hoặc khi so sánh với sự vật khác; thường đứng ở phần sau của câu.</p>
+              <p class="zh ex-big">我对音乐很感兴趣，<span class="hl">尤其/特别</span>是贝多芬<span class="gloss">（Bèiduōfēn，Beethoven）</span>的音乐，我喜欢极了。</p>
+            </div>
+          </div>
+
+          <div class="compare-box diff">
+            <p class="box-title">🔀 Điểm khác nhau</p>
+            <table class="difftable">
+              <tr><th>Đặc điểm</th><th class="zh">尤其</th><th class="zh">特别</th></tr>
+              <tr>
+                <td>① Khi nhấn mạnh khía cạnh nổi bật nhất, có kèm <span class="zh">是</span> không?</td>
+                <td>
+                  <div class="rule-line">Có thể có hoặc không có <span class="zh">是</span></div>
+                  <div class="cell-ex zh"><span class="ex-row">这次活动办得很不错，<span class="hl">尤其</span>王老师讲的那个故事，给我留下很深的印象。</span></div>
+                </td>
+                <td>
+                  <div class="rule-line">Thường có <span class="zh">是</span></div>
+                  <div class="cell-ex zh"><span class="ex-row">这次活动办得很不错，<span class="hl">特别是</span>王老师讲的那个故事，给我留下很深的印象。</span></div>
+                </td>
+              </tr>
+              <tr>
+                <td>② Làm phó từ với nghĩa "vô cùng, rất" (<span class="zh">格外、非常</span>)</td>
+                <td>
+                  <div class="diff-badge no">✕ Không có nghĩa này</div>
+                </td>
+                <td>
+                  <div class="diff-badge yes">✓ Có</div>
+                  <div class="cell-ex zh"><span class="ex-row">那本小说讲了一个爱情故事，很浪漫，让人<span class="hl">特别</span>感动。</span></div>
+                </td>
+              </tr>
+              <tr>
+                <td>③ Làm tính từ, nghĩa "khác thường, không bình thường"</td>
+                <td>
+                  <div class="diff-badge no">✕ Không dùng được cho trường hợp này</div>
+                </td>
+                <td>
+                  <div class="diff-badge yes">✓ Có</div>
+                  <div class="cell-ex zh"><span class="ex-row">如果您有什么<span class="hl">特别</span>要求或任何不清楚的地方，请和我们联系。</span></div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 12: BAI TAP TONG HOP -->
+      <div class="slide" id="slide-12">
+        <div class="slide-card">
+          <span class="eyebrow summary">📝 <span class="zh">做一做</span> · Bài tập tổng hợp</span>
+          <h2>Chọn từ thích hợp để điền vào chỗ trống</h2>
+          <p class="subtitle"><span class="zh">尤其</span> hay <span class="zh">特别</span> — chọn từ phù hợp cho mỗi câu</p>
+
+          <div class="reveal-all-bar"><button class="reveal-all-btn" onclick="toggleSumTable()" id="sumToggleBtn">👁️ Xem đáp án</button></div>
+
+          <table class="sumtable">
+            <tr><th>Câu</th><th class="zh">尤其</th><th class="zh">特别</th></tr>
+            <tr>
+              <td class="zh"><span class="num-latin">（1）</span>考试做题前首先要想清楚问题的意思，<span class="blank-line" style="min-width:80px;"></span>是在做数学题的时候。</td>
+              <td class="opt ans-cell hidden-ans">✓</td><td class="opt ans-cell hidden-ans">✓</td>
+            </tr>
+            <tr class="sum-explain-row"><td class="sum-explain" colspan="3">Nhấn mạnh khía cạnh nổi bật nhất (làm bài toán) trong tổng thể (làm bài thi) → cả <span class="zh">尤其</span> và <span class="zh">特别</span> đều dùng được.</td></tr>
+            <tr>
+              <td class="zh"><span class="num-latin">（2）</span>她从来没有见过这么大的雪，<span class="blank-line" style="min-width:80px;"></span>高兴，所以在外边玩儿了很长时间。</td>
+              <td class="opt ans-cell hidden-ans">✕</td><td class="opt ans-cell hidden-ans">✓</td>
+            </tr>
+            <tr class="sum-explain-row"><td class="sum-explain" colspan="3">Mang nghĩa "vô cùng, rất" (mức độ) → chỉ <span class="zh">特别</span> có nghĩa này, <span class="zh">尤其</span> không dùng được.</td></tr>
+            <tr>
+              <td class="zh"><span class="num-latin">（3）</span>这家饭馆的面味道很<span class="blank-line" style="min-width:80px;"></span>，在当地非常受欢迎。</td>
+              <td class="opt ans-cell hidden-ans">✕</td><td class="opt ans-cell hidden-ans">✓</td>
+            </tr>
+            <tr class="sum-explain-row"><td class="sum-explain" colspan="3"><span class="zh">很</span> + tính từ, nghĩa "khác thường, không giống thứ khác" → chỉ <span class="zh">特别</span> làm được tính từ, <span class="zh">尤其</span> không có cách dùng này.</td></tr>
+            <tr>
+              <td class="zh"><span class="num-latin">（4）</span>她换上了新买的那双鞋，穿了一条裙子，看上去<span class="blank-line" style="min-width:80px;"></span>好看，又说又笑，好像变了一个人。</td>
+              <td class="opt ans-cell hidden-ans">✕</td><td class="opt ans-cell hidden-ans">✓</td>
+            </tr>
+            <tr class="sum-explain-row"><td class="sum-explain" colspan="3">Mang nghĩa "vô cùng, rất" bổ nghĩa cho tính từ <span class="zh">好看</span> → chỉ <span class="zh">特别</span> dùng được.</td></tr>
+            <tr>
+              <td class="zh"><span class="num-latin">（5）</span>现在对历史感兴趣的人越来越少了，所以我写了几本书，希望能引起人们的注意，<span class="blank-line" style="min-width:80px;"></span>年轻人。</td>
+              <td class="opt ans-cell hidden-ans">✓</td><td class="opt ans-cell hidden-ans">✓</td>
+            </tr>
+            <tr class="sum-explain-row"><td class="sum-explain" colspan="3">Nhấn mạnh khía cạnh nổi bật nhất (giới trẻ) trong tổng thể (mọi người) → cả <span class="zh">尤其</span> và <span class="zh">特别</span> đều dùng được.</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- SLIDE 13: 同字词 准 -->
+      <div class="slide" id="slide-13">
+        <div class="slide-card">
+          <span class="eyebrow expand">🔠 <span class="zh">同字词</span> · Mở rộng từ vựng</span>
+          <h2 class="zh">同字词 · 准</h2>
+          <p class="subtitle">Những từ có chữ giống nhau — cùng mang chữ <span class="zh">准</span></p>
+
+          <div class="radial-wrap">
+            <svg class="radial-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <line x1="50" y1="50" x2="50" y2="12"></line>
+              <line x1="50" y1="50" x2="82.9" y2="69"></line>
+              <line x1="50" y1="50" x2="17.1" y2="69"></line>
+            </svg>
+            <div class="radial-center zh">准</div>
+            <div class="radial-node" style="left:50%; top:12%;">
+              <div class="w zh">准时</div>
+              <div class="py">zhǔnshí</div>
+              <div class="vi">đúng giờ</div>
+            </div>
+            <div class="radial-node" style="left:82.9%; top:69%;">
+              <div class="w zh">准备</div>
+              <div class="py">zhǔnbèi</div>
+              <div class="vi">chuẩn bị</div>
+            </div>
+            <div class="radial-node" style="left:17.1%; top:69%;">
+              <div class="w zh">标准</div>
+              <div class="py">biāozhǔn</div>
+              <div class="vi">tiêu chuẩn</div>
+            </div>
+          </div>
+
+          <div class="radial-fallback">
+            <div class="row"><span class="badge zh">准</span><span class="w zh">准时</span><span class="py">zhǔnshí</span><span class="vi">đúng giờ</span></div>
+            <div class="row"><span class="badge zh">准</span><span class="w zh">准备</span><span class="py">zhǔnbèi</span><span class="vi">chuẩn bị</span></div>
+            <div class="row"><span class="badge zh">准</span><span class="w zh">标准</span><span class="py">biāozhǔn</span><span class="vi">tiêu chuẩn</span></div>
+          </div>
+
+          <div class="section-label"><span class="zh">例如</span> · Ví dụ</div>
+          <ul class="example-list">
+            <li class="zh">
+              <div class="dialog-ex">
+                <p class="dialog-line"><span class="speaker">A：</span><span class="content">明天早上八点半在东门见，别迟到啊！</span></p>
+                <p class="dialog-line"><span class="speaker">B：</span><span class="content">放心吧，我一定<span class="hl">准时</span>到。</span></p>
+              </div>
+            </li>
+            <li class="zh">同学们正在教室里学习，<span class="hl">准备</span>下星期的考试。班长跑进来大声说："告诉大家一个好消息和一个坏消息。好消息是下星期不考试了！坏消息是下星期的考试，改到今天了。"</li>
+            <li class="zh">幸福的<span class="hl">标准</span>是不同的。有人觉得有房子和汽车就是幸福，有人认为找到真正的爱情就是幸福。</li>
+          </ul>
+
+          <div class="section-label"><span class="zh">做一做</span> · Thực hành</div>
+          <p class="q-vi" style="margin-top:-4px;margin-bottom:14px;"><span class="zh">选词填空</span> · Điền từ thích hợp vào chỗ trống <span class="zh" style="font-weight:700;">（准时　准备　标准）</span></p>
+
+          <div class="reveal-all-bar"><button class="reveal-all-btn" onclick="revealGroup('p6')">👁️ Xem tất cả đáp án</button></div>
+
+          <div class="practice-item">
+            <p class="q-zh zh"><span class="num-latin">（1）</span>美女的<span class="blank-line" style="min-width:90px;"></span>一直在变，但是不管什么时候，最重要的都是健康。如果没有了健康，也就没有了美。</p>
+            <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+            <div class="answer-box p6"><span class="zh">标准</span></div>
+          </div>
+          <div class="practice-item">
+            <p class="q-zh zh"><span class="num-latin">（2）</span>现在有个通知，十一月七日上午八点在图书馆三楼会议室开会，希望大家<span class="blank-line" style="min-width:90px;"></span>参加。</p>
+            <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+            <div class="answer-box p6"><span class="zh">准时</span></div>
+          </div>
+          <div class="practice-item">
+            <p class="q-zh zh"><span class="num-latin">（3）</span>各位乘客，前方到站是西直门。西直门是换乘车站，换乘车站乘客较多，请下车的乘客提前做好<span class="blank-line" style="min-width:90px;"></span>。</p>
+            <button class="reveal-btn" onclick="revealOne(this)">👁️ Xem đáp án</button>
+            <div class="answer-box p6"><span class="zh">准备</span></div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="site-footer">HSK<span class="num-latin">4</span>_Bài <span class="num-latin">5</span>_Ngữ pháp</div>
+</div>
+<script>
+function toggleSidebar(){ document.body.classList.toggle('sidebar-collapsed'); }
+
+function toggleFullscreen(){
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen().catch(function(){});
+  } else {
+    document.exitFullscreen();
+  }
+}
+document.addEventListener('fullscreenchange', function(){
+  var btn = document.getElementById('fullscreenBtn');
+  btn.textContent = document.fullscreenElement ? '⤢' : '⛶';
+  btn.title = document.fullscreenElement ? 'Thoát toàn màn hình' : 'Toàn màn hình';
+});
+
+var totalSlides = 14;
+var current = 0;
+function showSlide(n){
+  if(n<0) n=0; if(n>totalSlides-1) n=totalSlides-1;
+  document.getElementById('slide-'+current).classList.remove('active');
+  var navCurrent = document.querySelector('.nav-item.active, .nav-single > button.active');
+  if(navCurrent) navCurrent.classList.remove('active');
+  current = n;
+  var slideEl = document.getElementById('slide-'+current);
+  slideEl.classList.add('active');
+  document.body.classList.toggle('on-cover', current === 0);
+  var navNext = document.querySelector('[data-slide="'+current+'"]');
+  if(navNext) navNext.classList.add('active');
+  window.scrollTo(0,0);
+}
+function goTo(n){
+  if(n === current){ toggleSidebar(); return; }
+  showSlide(n);
+  if(window.innerWidth <= 900) document.body.classList.remove('sidebar-collapsed');
+}
+
+function handleGroupClick(e, summaryEl){
+  e.preventDefault();
+  var group = summaryEl.parentElement;
+  var n = parseInt(group.getAttribute('data-slide'), 10);
+  if(n === current){ toggleSidebar(); return; }
+  document.querySelectorAll('.nav-group').forEach(function(g){ g.open = (g === group); });
+  showSlide(n);
+  if(window.innerWidth <= 900) document.body.classList.remove('sidebar-collapsed');
+}
+
+document.querySelectorAll('.nav-group').forEach(function(group){
+  group.addEventListener('toggle', function(){
+    if(group.open){
+      document.querySelectorAll('.nav-group').forEach(function(other){
+        if(other !== group) other.open = false;
+      });
+    }
+  });
+});
+
+document.addEventListener('keydown', function(e){
+  if(e.key==='ArrowRight'){ showSlide(current+1); } else if(e.key==='ArrowLeft'){ showSlide(current-1); }
+});
+
+/* ===== REVEAL ANSWER ===== */
+function revealOne(btn){
+  var box = btn.nextElementSibling;
+  box.classList.toggle('show');
+  btn.textContent = box.classList.contains('show') ? '🙈 Ẩn đáp án' : '👁️ Xem đáp án';
+}
+function revealGroup(cls){
+  var boxes = document.querySelectorAll('.answer-box.'+cls);
+  var anyHidden = Array.prototype.some.call(boxes, function(b){ return !b.classList.contains('show'); });
+  boxes.forEach(function(b){ b.classList.toggle('show', anyHidden); });
+  var slide = document.querySelector('.answer-box.'+cls).closest('.slide-card');
+  slide.querySelectorAll('.reveal-btn').forEach(function(btn){
+    btn.textContent = anyHidden ? '🙈 Ẩn đáp án' : '👁️ Xem đáp án';
+  });
+}
+function toggleSumTable(){
+  var cells = document.querySelectorAll('.sumtable .ans-cell');
+  var rows = document.querySelectorAll('.sumtable .sum-explain-row');
+  var btn = document.getElementById('sumToggleBtn');
+  var hiding = !cells[0].classList.contains('hidden-ans');
+  cells.forEach(function(c){ c.classList.toggle('hidden-ans', hiding); });
+  rows.forEach(function(r){ r.classList.toggle('show', !hiding); });
+  btn.textContent = hiding ? '👁️ Xem đáp án' : '🙈 Ẩn đáp án';
+}
+</script>
+</body>
+</html>
